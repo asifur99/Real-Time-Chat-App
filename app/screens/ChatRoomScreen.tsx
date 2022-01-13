@@ -4,8 +4,16 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Message from '../components/Message'
 import MessageInput from '../components/MessageInput';
 import chatData from '../dummy-data/Chats'
+import { useRoute, useNavigation } from '@react-navigation/core';
 
 export default function ChatRoomScreen(){
+    const route = useRoute();
+    const navigation = useNavigation();
+
+    alert("ID of ChatRoom: " + route.params?.id);
+
+    navigation.setOptions({ title: 'Some Name' })
+
     return (
         <SafeAreaView style={styles.page}>
             <FlatList

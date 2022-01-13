@@ -3,23 +3,19 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { FontAwesome } from '@expo/vector-icons';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
-import { ColorSchemeName } from 'react-native';
 
-import Colors from '../constants/Colors';
-import useColorScheme from '../hooks/useColorScheme';
 import NotFoundScreen from '../screens/NotFoundScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
 /*-----------------------------------MY IMPORTS------------------------------------------*/
-import TabOneScreen from '../screens/HomeScreen';
+import HomeScreen from '../screens/HomeScreen';
 import ChatRoomScreen from '../screens/ChatRoomScreen';
+import { ColorSchemeName, View, Image, Text, useWindowDimensions } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 /*---------------------------------------------------------------------------------------*/
 
 
@@ -42,54 +38,67 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="ChatRoom" component={ChatRoomScreen} options={{ headerShown: true }}/>
-      <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
+      <Stack.Screen 
+        name="Home" 
+        component={HomeScreen} 
+        options={{ headerTitle: HomeHeader }}
+      />
+
+      <Stack.Screen 
+        name="ChatRoom" 
+        component={ChatRoomScreen} 
+        options={{ 
+          headerTitle: ChatHeader,
+        }}
+      />
+
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
     </Stack.Navigator>
   );
 }
 
-/**
- * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.
- * https://reactnavigation.org/docs/bottom-tab-navigator
- */
-const BottomTab = createBottomTabNavigator<RootTabParamList>();
+const HomeHeader = () => {
+  const { width } = useWindowDimensions();
 
-function BottomTabNavigator() {
-  const colorScheme = useColorScheme();
+  return(
+    <View style={{
+      flexDirection: 'row', 
+      justifyContent: 'space-between',
+      width: width-25,
+      padding: 10,
+      alignItems: 'center',
+    }}>
 
-  return (
-    <BottomTab.Navigator
-      initialRouteName="TabOne"
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme].tint,
-      }}>
-      <BottomTab.Screen
-        name="TabOne"
-        component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        })}
+      <Image
+        source={{uri: 'https://a1cf74336522e87f135f-2f21ace9a6cf0052456644b80fa06d4f.ssl.cf2.rackcdn.com/images/characters/large/800/Bob-ParrMr-Incredible.The-Incredibles.webp'}}
+        style={{ width: 50, height: 50, borderRadius: 15 }}
       />
-      <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
-        options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
-      />
-    </BottomTab.Navigator>
-  );
+      <Text style={{flex: 1, textAlign: 'center', fontWeight: 'bold'}}>Real-Time-Chat-App</Text>
+      <MaterialCommunityIcons name="circle-edit-outline" size={24} color="darkorange" style={{marginHorizontal: 30}} />
+    </View>
+  )
 }
 
-/**
- * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
- */
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
-  return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
+const ChatHeader = (props) => {
+  const { width } = useWindowDimensions();
+
+  console.log(props);
+
+  return(
+    <View style={{
+      flexDirection: 'row', 
+      justifyContent: 'space-between',
+      width: width-80,
+      padding: 10,
+      alignItems: 'center',
+    }}>
+
+      <Image
+        source={{uri: 'https://a1cf74336522e87f135f-2f21ace9a6cf0052456644b80fa06d4f.ssl.cf2.rackcdn.com/images/characters/large/800/Bob-ParrMr-Incredible.The-Incredibles.webp'}}
+        style={{ width: 50, height: 50, borderRadius: 15 }}
+      />
+      <Text style={{flex: 1, marginLeft:10, fontWeight: 'bold'}}>{ props.children }</Text>
+      <MaterialCommunityIcons name="circle-edit-outline" size={24} color="darkorange" style={{marginHorizontal: 30}} />
+    </View>
+  )
 }
