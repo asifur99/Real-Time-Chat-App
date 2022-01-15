@@ -9,11 +9,18 @@
       "UnauthRoleName": "amplify-realtimeapp-staging-194742-unauthRole",
       "StackName": "amplify-realtimeapp-staging-194742",
       "StackId": "arn:aws:cloudformation:us-east-1:548506814424:stack/amplify-realtimeapp-staging-194742/d6805960-7572-11ec-9698-0ab7e9d21121",
-      "AmplifyAppId": "d1zipnf3zapcbi"
+      "AmplifyAppId": "d1zipnf3zapcbi",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-realtimeapp-staging-194742-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
     },
     "categories": {
       "auth": {
         "RealTimeApp": {}
+      },
+      "function": {
+        "RealTimeAppPostConfirmation": {
+          "deploymentBucketName": "amplify-realtimeapp-staging-194742-deployment",
+          "s3Key": "amplify-builds/RealTimeAppPostConfirmation-484e6e625a4752374f71-build.zip"
+        }
       }
     }
   }
