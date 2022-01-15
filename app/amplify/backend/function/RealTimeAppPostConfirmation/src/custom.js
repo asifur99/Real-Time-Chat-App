@@ -43,7 +43,7 @@ exports.handler = async (event) => {
 
   //save user name to the DB
   try{
-    dynamoDb.putItem(param).promise();
+    await dynamoDb.putItem(param).promise();
     console.log("User Added Successfully");
   } catch(e){
     console.log(e);

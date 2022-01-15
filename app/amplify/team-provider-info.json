@@ -19,7 +19,7 @@
       "function": {
         "RealTimeAppPostConfirmation": {
           "deploymentBucketName": "amplify-realtimeapp-staging-194742-deployment",
-          "s3Key": "amplify-builds/RealTimeAppPostConfirmation-484e6e625a4752374f71-build.zip"
+          "s3Key": "amplify-builds/RealTimeAppPostConfirmation-65363739516a6e713347-build.zip"
         }
       }
     }
