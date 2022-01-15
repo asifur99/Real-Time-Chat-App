@@ -15,7 +15,7 @@ import LinkingConfiguration from './LinkingConfiguration';
 import HomeScreen from '../screens/HomeScreen';
 import ChatRoomScreen from '../screens/ChatRoomScreen';
 import { ColorSchemeName, View, Image, Text, useWindowDimensions } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { FontAwesome, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 /*---------------------------------------------------------------------------------------*/
 
 
@@ -98,7 +98,8 @@ const ChatHeader = (props) => {
         style={{ width: 50, height: 50, borderRadius: 15 }}
       />
       <Text style={{flex: 1, marginLeft:10, fontWeight: 'bold'}}>{ props.children }</Text>
-      <MaterialCommunityIcons name="circle-edit-outline" size={24} color="darkorange" style={{marginHorizontal: 30}} />
+      <FontAwesome name="video-camera" size={24} color="black" color="darkorange" style={{marginHorizontal: 30}} />
+      <Ionicons name="call-sharp" size={24} color="darkorange" style={{marginHorizontal: 30}} />
     </View>
   )
 }
