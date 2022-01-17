@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-realtimechatapp-staging-00417-authRole",
+      "UnauthRoleArn": "arn:aws:iam::548506814424:role/amplify-realtimechatapp-staging-00417-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::548506814424:role/amplify-realtimechatapp-staging-00417-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-realtimechatapp-staging-00417-deployment",
+      "UnauthRoleName": "amplify-realtimechatapp-staging-00417-unauthRole",
+      "StackName": "amplify-realtimechatapp-staging-00417",
+      "StackId": "arn:aws:cloudformation:us-east-1:548506814424:stack/amplify-realtimechatapp-staging-00417/037e3510-7729-11ec-ae47-0e8276c52417",
+      "AmplifyAppId": "d35vlhsmz0n8bw"
+    },
+    "categories": {
+      "auth": {
+        "RealTimeChatApp": {}
+      }
+    }
+  }
+}
