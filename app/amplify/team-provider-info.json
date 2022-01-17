@@ -9,9 +9,16 @@
       "UnauthRoleName": "amplify-realtimechatapp-staging-00417-unauthRole",
       "StackName": "amplify-realtimechatapp-staging-00417",
       "StackId": "arn:aws:cloudformation:us-east-1:548506814424:stack/amplify-realtimechatapp-staging-00417/037e3510-7729-11ec-ae47-0e8276c52417",
-      "AmplifyAppId": "d35vlhsmz0n8bw"
+      "AmplifyAppId": "d35vlhsmz0n8bw",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-realtimechatapp-staging-00417-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
     },
     "categories": {
+      "function": {
+        "RealTimeChatAppPostConfirmation": {
+          "deploymentBucketName": "amplify-realtimechatapp-staging-00417-deployment",
+          "s3Key": "amplify-builds/RealTimeChatAppPostConfirmation-7756325269625545755a-build.zip"
+        }
+      },
       "auth": {
         "RealTimeChatApp": {}
       }
