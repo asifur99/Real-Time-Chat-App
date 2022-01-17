@@ -17,7 +17,7 @@ export default function TabOneScreen() {
       <FlatList 
         data={ChatRoomData} 
         renderItem={({item}) => <ChatRoomItem chatRoom={item}/>} 
-        showsVerticalScrollIndicator = {false}
+        showsVerticalScrollIndicator = {true}
       />
 
       <View style={styles.button}>

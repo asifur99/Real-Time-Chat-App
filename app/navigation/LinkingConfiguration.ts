@@ -6,6 +6,7 @@
 
  import { LinkingOptions } from '@react-navigation/native';
  import * as Linking from 'expo-linking';
+ import { ChatRoom } from '../src/models';
  
  import { RootStackParamList } from '../types';
  
@@ -15,14 +16,19 @@
      screens: {
        Root: {
          screens: {
-           TabOne: {
+           Home: {
              screens: {
                HomeScreen: 'Home',
              },
            },
-           TabTwo: {
+           ChatRoom: {
              screens: {
                ChatRoomScreen: 'ChatRoom',
+             },
+           },
+           UsersScreen: {
+             screens: {
+               UsersScreen: 'UsersScreen',
              },
            },
          },
@@ -32,5 +38,4 @@
    },
  };
  
- export default linking;
- 
+export default linking; 

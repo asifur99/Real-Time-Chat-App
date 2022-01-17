@@ -3,7 +3,6 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
- import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
  import { createNativeStackNavigator } from '@react-navigation/native-stack';
  import * as React from 'react';
  
@@ -14,8 +13,12 @@
  /*-----------------------------------MY IMPORTS------------------------------------------*/
  import HomeScreen from '../screens/HomeScreen';
  import ChatRoomScreen from '../screens/ChatRoomScreen';
- import { ColorSchemeName, View, Image, Text, useWindowDimensions } from 'react-native';
+ import UsersScreen from '../screens/UsersScreen';
+ 
+ import { ColorSchemeName, View, Image, Text, useWindowDimensions, Pressable } from 'react-native';
  import { FontAwesome, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+ import { NavigationContainer, DefaultTheme, DarkTheme, useNavigation } from '@react-navigation/native';
+ 
  /*---------------------------------------------------------------------------------------*/
  
  
@@ -52,6 +55,14 @@
          }}
        />
  
+       <Stack.Screen
+         name="UsersScreen" 
+         component={UsersScreen} 
+         options={{ 
+           title: "Users",
+         }}
+       />
+ 
        <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
      </Stack.Navigator>
    );
@@ -59,6 +70,8 @@
  
  const HomeHeader = () => {
    const { width } = useWindowDimensions();
+ 
+   const navigation = useNavigation();
  
    return(
      <View style={{
@@ -74,7 +87,9 @@
          style={{ width: 50, height: 50, borderRadius: 15 }}
        />
        <Text style={{flex: 1, textAlign: 'center', fontWeight: 'bold'}}>Real-Time-Chat-App</Text>
-       <MaterialCommunityIcons name="circle-edit-outline" size={24} color="darkorange" style={{marginHorizontal: 30}} />
+       <Pressable onPress={() => navigation.navigate('UsersScreen')}>
+         <MaterialCommunityIcons name="circle-edit-outline" size={24} color="darkorange" style={{marginHorizontal: 30}} />
+       </Pressable>
      </View>
    )
  }
