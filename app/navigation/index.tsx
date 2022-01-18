@@ -3,10 +3,10 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
- import { createNativeStackNavigator } from '@react-navigation/native-stack';
  import * as React from 'react';
  
  import NotFoundScreen from '../screens/NotFoundScreen';
+ import { createNativeStackNavigator } from '@react-navigation/native-stack';
  import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
  import LinkingConfiguration from './LinkingConfiguration';
  
@@ -18,7 +18,6 @@
  import { ColorSchemeName, View, Image, Text, useWindowDimensions, Pressable } from 'react-native';
  import { FontAwesome, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
  import { NavigationContainer, DefaultTheme, DarkTheme, useNavigation } from '@react-navigation/native';
- 
  /*---------------------------------------------------------------------------------------*/
  
  
@@ -67,9 +66,9 @@
         name="NotFound" 
         component={NotFoundScreen} 
         options={{ 
-          title: 'ERROR!',
+          title: 'This screen doesn\'t exist.',
           headerStyle: {
-            backgroundColor: 'red',
+            backgroundColor: 'maroon',
           },
           headerTitleStyle: {
             color: 'white'
