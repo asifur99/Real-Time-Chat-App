@@ -63,7 +63,19 @@
          }}
        />
  
-       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
+       <Stack.Screen 
+        name="NotFound" 
+        component={NotFoundScreen} 
+        options={{ 
+          title: 'ERROR!',
+          headerStyle: {
+            backgroundColor: 'red',
+          },
+          headerTitleStyle: {
+            color: 'white'
+          },
+        }} 
+       />
      </Stack.Navigator>
    );
  }
