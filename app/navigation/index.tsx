@@ -66,12 +66,14 @@
         name="NotFound" 
         component={NotFoundScreen} 
         options={{ 
-          title: 'This screen doesn\'t exist.',
+          title: 'This page doesn\'t exist.',
           headerStyle: {
             backgroundColor: 'maroon',
           },
           headerTitleStyle: {
-            color: 'white'
+            color: 'white',
+            fontSize: 25,
+            fontWeight: 'bold',
           },
         }} 
        />

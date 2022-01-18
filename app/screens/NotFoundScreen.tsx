@@ -8,7 +8,6 @@ import { RootStackScreenProps } from '../types';
 export default function NotFoundScreen({ navigation }: RootStackScreenProps<'NotFound'>) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>This screen doesn't exist.</Text>
       <TouchableOpacity onPress={() => navigation.replace('Home')} style={styles.btn}>
         <Entypo name="home" size={42} color="white" />
       </TouchableOpacity>
@@ -23,11 +22,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
-  },
-  title: {
-    padding: 20,
-    fontSize: 25,
-    fontWeight: 'bold',
   },
   linkText: {
     fontSize: 18,

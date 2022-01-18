@@ -7,7 +7,6 @@ import ChatRoomData from '../dummy-data/ChatRooms';
 import { MaterialIcons } from '@expo/vector-icons';
 
 export default function TabOneScreen() {
-
   const logout = () => {
     Auth.signOut();
   }

@@ -14,6 +14,7 @@ export default function UserItem({ user }) {
 
     const onPress = async () => {
         // TODO: dont create a new chat room if one already exists
+        // Query chatroom and charusers and filter on user id
 
         // Create a chatroom
         const newChatRoom = await DataStore.save(new ChatRoom({newMessages: 0}));

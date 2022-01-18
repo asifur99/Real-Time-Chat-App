@@ -9,7 +9,7 @@ export default function UsersScreen() {
   const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {
-    //query users
+    // query users
     DataStore.query(User).then(setUsers);
   }, [])
 
@@ -17,8 +17,7 @@ export default function UsersScreen() {
     <View style={styles.page}>
       <FlatList 
         data={users} 
-        renderItem={({ item }) => <UserItem user={item}/>} 
-        showsVerticalScrollIndicator = {false}
+        renderItem={({ item }) => <UserItem user={item}/>}
       />
     </View>
   );
