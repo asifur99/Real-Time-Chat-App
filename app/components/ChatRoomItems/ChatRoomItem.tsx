@@ -7,11 +7,12 @@ import { useNavigation } from '@react-navigation/core';
 import styles from './styles';
 import { Auth, DataStore } from 'aws-amplify';
 
-import { ChatRoomUser, User } from '../../src/models';
+import { ChatRoomUser, Message, User } from '../../src/models';
 
 export default function ChatRoomItem({ chatRoom }){
     // const [users, setUsers] = useState<User[]>([]); // all users in chatroom
     const [user, setUser] = useState<User|null>(null); // all users in chatroom
+    const [lastMessage, setLastMessage] = useState<Message|undefined>(); // all users in chatroom
 
     const navigation = useNavigation();
 
@@ -28,15 +29,25 @@ export default function ChatRoomItem({ chatRoom }){
         };
 
         fetchUsers();
-    })
+    }, []);
+
+    console.log(chatRoom);
+
+    useEffect(() => {
+        if (!chatRoom.chatRoomLastMessageId){
+            return;
+        }
+
+        DataStore.query(Message, chatRoom.chatRoomLastMessageId).then(setLastMessage);
+    }, []);
 
     const onPress = () => {
         navigation.navigate('ChatRoom', { id: chatRoom.id });
-    }
+    };
 
     if (!user){
         return <ActivityIndicator />
-    }
+    };
 
     return(
         <Pressable onPress={onPress} style={styles.container}>
@@ -50,9 +61,9 @@ export default function ChatRoomItem({ chatRoom }){
             <View style={styles.chatBox}>
                 <View style={styles.group}>
                     <Text style={styles.name}>{user.name}</Text>
-                    <Text style={styles.text}>{chatRoom.lastMessage?.createdAt}</Text>
+                    <Text style={styles.text}>{lastMessage?.createdAt}</Text>
                 </View>
-                <Text numberOfLines={1} style={styles.text}>{chatRoom.lastMessage?.content}</Text>
+                <Text numberOfLines={1} style={styles.text}>{lastMessage?.content}</Text>
             </View>
         </Pressable>
     );

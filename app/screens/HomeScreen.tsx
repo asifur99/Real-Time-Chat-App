@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, FlatList, Pressable, Text } from 'react-native';
-import { Auth, DataStore } from 'aws-amplify';
+import { Auth } from 'aws-amplify';
+import { DataStore } from '@aws-amplify/datastore'
 import { MaterialIcons } from '@expo/vector-icons';
 
 import { ChatRoom, ChatRoomUser } from '../src/models';

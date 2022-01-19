@@ -3,12 +3,32 @@ import { View, TextInput, Pressable } from 'react-native'
 import styles from './styles'
 import { Entypo, FontAwesome, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 
-export default function MessageInput() {
+import { DataStore } from '@aws-amplify/datastore';
+import { ChatRoom, Message } from '../../src/models';
+import Auth from '@aws-amplify/auth';
+
+export default function MessageInput({chatRoom}) {
     const [message, setMessage] = useState('');
 
-    const send = () => {
-        alert('Sending: ' + message);
+    const send = async () => {
+        // Send Message
+        const user = await Auth.currentAuthenticatedUser();
+
+        const newMessage = await DataStore.save( new Message({
+            content: message,
+            userID: user.attributes.sub,
+            chatroomID: chatRoom.id,
+        }))
+
+        updateLastMessage(newMessage);
+
         setMessage('');
+    }
+
+    const updateLastMessage = async (newMessage) => {
+        DataStore.save(ChatRoom.copyOf(chatRoom, updatedChatRoom => {
+            updatedChatRoom.LastMessage = newMessage;
+        }))
     }
 
     const onPress = () => {

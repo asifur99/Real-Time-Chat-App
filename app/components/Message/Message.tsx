@@ -1,15 +1,35 @@
-import React from 'react'
-import { View, Text } from 'react-native'
+import React, { useState, useEffect } from 'react';
+import { View, Text, ActivityIndicator } from 'react-native';
+import { DataStore } from '@aws-amplify/datastore';
+import { User } from '../../src/models';
 
 import styles from './styles';
-
-const send = 'lightgrey';
-const receive = '#ff8000';
-
-const myID = 'u1';
+import { Auth } from 'aws-amplify';
 
 export default function Message({ message }) {
-    const you = message.user.id == myID;
+    const [user, setUser] = useState<User|undefined>();
+    const [you, setYou] = useState<boolean>(false);
+
+    useEffect(() => {
+        DataStore.query(User, message.userID).then(setUser);
+    }, [])
+
+    useEffect(() => {
+        const check = async () => {
+            if (!user){
+                return;
+            }
+
+            const authenticatedUser = await Auth.currentAuthenticatedUser();
+            setYou(user.id === authenticatedUser.attributes.sub);
+        };
+
+        check();
+    }, [user])
+
+    if (!user){
+        return <ActivityIndicator />
+    }
 
     return (
         <View style={
