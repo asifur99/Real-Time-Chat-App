@@ -202,9 +202,9 @@ export default function MessageInput({chatRoom}) {
                         <Entypo name="image" size={24} color="grey" style={styles.icon} />
                     </Pressable>
 
-                    <Pressable onPress={takePhoto}>
+                    {/* <Pressable onPress={takePhoto}>
                         <Entypo name="camera" size={24} color="grey" style={styles.icon} />
-                    </Pressable>
+                    </Pressable> */}
 
                     <FontAwesome name="microphone" size={24} color="grey" style={styles.icon} />
                 </View>
