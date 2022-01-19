@@ -31,8 +31,6 @@ export default function ChatRoomItem({ chatRoom }){
         fetchUsers();
     }, []);
 
-    console.log(chatRoom);
-
     useEffect(() => {
         if (!chatRoom.chatRoomLastMessageId){
             return;

@@ -62,8 +62,6 @@ export default function ChatRoomScreen(){
         setMessages(fetchMessages);
     }
 
-    navigation.setOptions({ title: 'Some Name' })
-
     if (!chatRoom) {
         return <ActivityIndicator />
     }
