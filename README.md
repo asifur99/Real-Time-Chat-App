@@ -6,6 +6,8 @@
 ## Technologies Used
 
 **Frontend:** React-native
-**Backend:** AWS
-**Database:** AWS
+
+**Backend:** AWS Amplify
+
+**Database:** DynamoDB
 
