@@ -16,7 +16,7 @@
       "function": {
         "RealTimeChatAppPostConfirmation": {
           "deploymentBucketName": "amplify-realtimechatapp-staging-00417-deployment",
-          "s3Key": "amplify-builds/RealTimeChatAppPostConfirmation-7756325269625545755a-build.zip"
+          "s3Key": "amplify-builds/RealTimeChatAppPostConfirmation-6246394648343471535a-build.zip"
         }
       },
       "auth": {

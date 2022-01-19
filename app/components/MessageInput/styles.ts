@@ -35,6 +35,15 @@ const styles = StyleSheet.create({
     },
     icon: {
         marginHorizontal: 5,
+    },
+    imageContainer: {
+        flexDirection: 'row',
+        marginVertical: 10,
+        alignSelf: 'stretch',
+        justifyContent: 'space-between',
+        borderWidth: 1,
+        borderColor: 'grey',
+        borderRadius: 15,
     }
 });
 

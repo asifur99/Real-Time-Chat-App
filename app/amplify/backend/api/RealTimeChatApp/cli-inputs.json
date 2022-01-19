@@ -3,7 +3,7 @@
   "serviceConfiguration": {
     "apiName": "RealTimeChatApp",
     "serviceName": "AppSync",
-    "gqlSchemaPath": "/tmp/amplify-ea9ba9f9-8cd0-4e49-9151-a63bcd166122/amplify/backend/api/RealTimeChatApp/schema.graphql",
+    "gqlSchemaPath": "/tmp/amplify-30e47254-b1d8-4e5b-97e6-0f111520f610/amplify/backend/api/RealTimeChatApp/schema.graphql",
     "defaultAuthType": {
       "mode": "API_KEY",
       "keyDescription": "api key description",
