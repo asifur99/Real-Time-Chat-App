@@ -73,6 +73,7 @@ export default function ChatRoomScreen(){
                 renderItem={ ({item}) => <Message message={item} /> }
                 /** the most recent message below and as we go up it will display the past message */
                 inverted
+                showsVerticalScrollIndicator={ false }
             />
             <MessageInput chatRoom={chatRoom} />
         </SafeAreaView>
