@@ -18,6 +18,7 @@ export default function UsersScreen() {
       <FlatList 
         data={users} 
         renderItem={({ item }) => <UserItem user={item}/>}
+        showsVerticalScrollIndicator={ false }
       />
     </View>
   );
