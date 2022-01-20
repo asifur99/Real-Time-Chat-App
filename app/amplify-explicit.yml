@@ -3,6 +3,7 @@ frontend:
  phases:
   preBuild:
    commands:
+    - nvm use $VERSION_NODE_16.13.1
     - npm install --quiet --global expo-cli
     - >
      if [ -f yarn.lock ]; then
@@ -14,6 +15,7 @@ frontend:
      fi
   build:
    commands:
+    - nvm use $VERSION_NODE_16.13.1
     - expo build:web
  artifacts:
   baseDirectory: web-build
