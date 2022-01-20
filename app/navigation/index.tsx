@@ -14,6 +14,7 @@
  import HomeScreen from '../screens/HomeScreen';
  import ChatRoomScreen from '../screens/ChatRoomScreen';
  import UsersScreen from '../screens/UsersScreen';
+ import ProfileScreen from '../screens/ProfileScreen';
  
  import { ColorSchemeName, View, Image, Text, useWindowDimensions, Pressable } from 'react-native';
  import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -21,7 +22,7 @@
  import ChatRoomHeader from './ChatRoomHeader';
 import { Auth, DataStore } from 'aws-amplify';
 import { useEffect, useState } from 'react';
-import { ChatRoomUser, User } from '../src/models';
+import { User } from '../src/models';
  /*---------------------------------------------------------------------------------------*/
  
 
@@ -63,6 +64,14 @@ function RootNavigator() {
         component={UsersScreen} 
         options={{ 
           title: "Users",
+        }}
+      />
+
+      <Stack.Screen
+        name="ProfileScreen"
+        component={ProfileScreen}  
+        options={{ 
+          title: "Profile",
         }}
       />
 
@@ -115,10 +124,13 @@ const HomeHeader = () => {
       alignItems: 'center',
     }}>
 
-      <Image
-        source={{uri: user?.imageUri}}
-        style={{ width: 50, height: 50, borderRadius: 15 }}
-      />
+      <Pressable onPress={() => navigation.navigate('ProfileScreen')}>
+        <Image
+          source={{uri: user?.imageUri}}
+          style={{ width: 50, height: 50, borderRadius: 15 }}
+        />
+      </Pressable>
+      
       <Text style={{flex: 1, textAlign: 'center', fontWeight: 'bold'}}>Real-Time-Chat-App</Text>
       <Pressable onPress={() => navigation.navigate('UsersScreen')}>
         <MaterialCommunityIcons name="circle-edit-outline" size={24} color="darkorange" style={{marginHorizontal: 30}} />

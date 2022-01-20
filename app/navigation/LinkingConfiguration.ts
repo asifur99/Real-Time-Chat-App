@@ -31,6 +31,11 @@
                UsersScreen: 'UsersScreen',
              },
            },
+           ProfileScreen: {
+            screens: {
+              ProfileScreen: 'Profile',
+            },
+          },
          },
        },
        NotFound: '*',
