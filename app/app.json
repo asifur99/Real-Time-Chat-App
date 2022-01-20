@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "app",
-    "slug": "app",
+    "name": "Real Time Chat App",
+    "slug": "real-time-chat-app",
+    "description": "This is an App made for COMP 4905",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",

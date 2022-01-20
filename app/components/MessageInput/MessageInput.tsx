@@ -9,21 +9,27 @@ import { Auth, Storage } from 'aws-amplify';
 import EmojiSelector from 'react-native-emoji-selector';
 import * as ImagePicker from 'expo-image-picker';
 import { v4 as uuid } from 'uuid';
+import { Audio } from 'expo-av';
+import AudioPlayer from '../AudioPlayer';
 
 export default function MessageInput({chatRoom}) {
     const [message, setMessage] = useState('');
     const [openEmoji, setOpenEmoji] = useState(false);
     const [image, setImage] = useState<string|null>(null);
     const [progress, setProgress] = useState(0);
+    const [recording, setRecording] = useState<Audio.Recording | null>(null);
+    const [soundURI, setSoundURI] = useState<string|null>(null);
+
 
     useEffect(() => {
         (async () => {
             if (Platform.OS !== 'web'){
                 const libraryPermission = await ImagePicker.requestMediaLibraryPermissionsAsync();
                 const photoPermission = await ImagePicker.requestCameraPermissionsAsync();
+                const audioPermission = await Audio.requestPermissionsAsync();
 
-                if (libraryPermission !== "granted" || photoPermission !== "granted"){
-                    alert('Sorry, we need camera roll permissions to make this work!');
+                if (libraryPermission || photoPermission || audioPermission){
+                    alert('Sorry, we need these permissions to make this work!');
                 }
             }
         })();
@@ -34,7 +40,8 @@ export default function MessageInput({chatRoom}) {
         setOpenEmoji(false);
         setImage(null);
         setProgress(0);
-    }
+        setSoundURI(null);
+    };
 
     const send = async () => {
         // Send Message
@@ -49,17 +56,20 @@ export default function MessageInput({chatRoom}) {
         updateLastMessage(newMessage);
 
         reset();
-    }
+    };
 
     const updateLastMessage = async (newMessage) => {
         DataStore.save(ChatRoom.copyOf(chatRoom, updatedChatRoom => {
             updatedChatRoom.LastMessage = newMessage;
         }))
-    }
+    };
 
     const onPress = () => {
         if (image){
             sendImage();
+        }
+        else if (soundURI){
+            sendAudio();
         }
         else if (message){
             send();
@@ -67,7 +77,7 @@ export default function MessageInput({chatRoom}) {
         else {
             alert('Please Enter a Message');
         }
-    }
+    };
 
     // Pick Image
     const pickImage = async () => {
@@ -99,14 +109,14 @@ export default function MessageInput({chatRoom}) {
 
     const progressCallback = (progress) => {
         setProgress(progress.loaded/progress.total);
-    }
+    };
     
     const sendImage = async () => {
         if (!image) {
             return;
         }
         
-        const blob = await getBlob();
+        const blob = await getBlob(image);
         const { key } = await Storage.put(`${uuid()}.png`, blob, { progressCallback });
 
         // send message
@@ -122,19 +132,75 @@ export default function MessageInput({chatRoom}) {
         updateLastMessage(newMessage);
 
         reset();
-    }
+    };
 
-    const getBlob =  async () => {
-        if (!image) {
-            return null;
-        }
-
-        const response = await fetch(image);
+    const getBlob =  async (item: string) => {
+        const response = await fetch(item);
         const blob = await response.blob();
 
         return blob;
-    }
+    };
 
+    // Audio
+    async function startRecording() {
+        try {
+            await Audio.setAudioModeAsync({
+                allowsRecordingIOS: true,
+                playsInSilentModeIOS: true,
+            }); 
+            console.log('Starting recording..');
+            const { recording } = await Audio.Recording.createAsync(
+                Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY
+            );
+            setRecording(recording);
+            console.log('Recording started');
+        } catch (err) {
+            console.error('Failed to start recording', err);
+        }
+    };
+    
+    async function stopRecording() {
+        console.log('Recording stopped!');
+        if (!recording) {
+            return;
+        }
+
+        setRecording(null);
+        await recording.stopAndUnloadAsync();
+        const uri = recording.getURI(); 
+        console.log('Recording stopped and stored at', uri);
+
+        if (!uri){
+            return;
+        }
+
+        setSoundURI(uri);
+    };
+
+    const sendAudio = async () => {
+        if (!soundURI) {
+            return;
+        }
+        
+        const uri = soundURI.split('.');
+        const extension = uri[uri.length - 1];
+        const blob = await getBlob(soundURI);
+        const { key } = await Storage.put(`${uuid()}.${extension}`, blob, { progressCallback });
+
+        // send message
+        const user = await Auth.currentAuthenticatedUser();
+
+        const newMessage = await DataStore.save( new Message({
+            content: message,
+            audio: key,
+            userID: user.attributes.sub,
+            chatroomID: chatRoom.id,
+        }))
+
+        updateLastMessage(newMessage);
+
+        reset();
+    };
 
     return (
         <View style={[styles.main, {height: openEmoji ? "50%" : "auto"}]}>
@@ -143,31 +209,11 @@ export default function MessageInput({chatRoom}) {
                 <View style={styles.imageContainer}>
                     <Image 
                         source={{ uri: image}} 
-                        style={{ 
-                            width: 100, 
-                            height: 100, 
-                            margin: 5,
-                            borderRadius: 10,
-                        }}
+                        style={styles.imgStyle}
                     />
 
-                    <View
-                        style={{
-                            flex: 1,
-                            justifyContent: 'flex-start',
-                            alignSelf: 'flex-end',
-                            margin: 2,
-                        }}
-                    >
-                        <View 
-                            style={{ 
-                                height: 4,
-                                borderRadius: 5,
-                                backgroundColor: '#ff8000', 
-                                width: `${progress * 100}%`,
-                            }}
-                        >
-                        </View>
+                    <View style={styles.imgProgressView}>
+                        <View style={[styles.imgProgress,  {width: `${progress * 100}%`}]}></View>
                     </View>
 
                     <Pressable onPress={() => setImage(null)}>
@@ -182,6 +228,8 @@ export default function MessageInput({chatRoom}) {
                     </Pressable>
                 </View>
             )}
+
+            { soundURI && <AudioPlayer soundURI={soundURI}/>}
 
             <View style={styles.row}>
                 <View style={styles.inputContainer}>
@@ -206,7 +254,14 @@ export default function MessageInput({chatRoom}) {
                         <Entypo name="camera" size={24} color="grey" style={styles.icon} />
                     </Pressable> */}
 
-                    <FontAwesome name="microphone" size={24} color="grey" style={styles.icon} />
+                    <Pressable onPressIn={startRecording} onPressOut={stopRecording}>
+                        <FontAwesome 
+                            name="microphone" 
+                            size={24} 
+                            color={recording ? "#ff8000" : "grey"}
+                            style={styles.icon} 
+                        />
+                    </Pressable>
                 </View>
 
                 <Pressable onPress={onPress} style={styles.buttonContainer}>

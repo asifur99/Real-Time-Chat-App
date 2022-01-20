@@ -44,7 +44,24 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: 'grey',
         borderRadius: 15,
-    }
+    },
+    imgStyle: { 
+        width: 100, 
+        height: 100, 
+        margin: 5,
+        borderRadius: 10,
+    },
+    imgProgressView: {
+        flex: 1,
+        justifyContent: 'flex-start',
+        alignSelf: 'flex-end',
+        margin: 2,
+    },
+    imgProgress: { 
+        height: 4,
+        borderRadius: 5,
+        backgroundColor: '#ff8000',
+    },
 });
 
 export default styles;
