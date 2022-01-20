@@ -19,6 +19,9 @@
  import { MaterialCommunityIcons } from '@expo/vector-icons';
  import { NavigationContainer, DefaultTheme, DarkTheme, useNavigation } from '@react-navigation/native';
  import ChatRoomHeader from './ChatRoomHeader';
+import { Auth, DataStore } from 'aws-amplify';
+import { useEffect, useState } from 'react';
+import { ChatRoomUser, User } from '../src/models';
  /*---------------------------------------------------------------------------------------*/
  
 
@@ -83,6 +86,22 @@ function RootNavigator() {
 }
  
 const HomeHeader = () => {
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const authUser = await Auth.currentAuthenticatedUser();
+
+      const currUser = (await DataStore.query(User))
+                    .filter(user => user.id === authUser.attributes.sub)
+                    .map(user => user);
+
+      setUser(currUser[0]);
+    };
+
+    fetchUsers();
+  }, []);
+
   const { width } = useWindowDimensions();
 
   const navigation = useNavigation();
@@ -97,7 +116,7 @@ const HomeHeader = () => {
     }}>
 
       <Image
-        source={{uri: 'https://a1cf74336522e87f135f-2f21ace9a6cf0052456644b80fa06d4f.ssl.cf2.rackcdn.com/images/characters/large/800/Bob-ParrMr-Incredible.The-Incredibles.webp'}}
+        source={{uri: user?.imageUri}}
         style={{ width: 50, height: 50, borderRadius: 15 }}
       />
       <Text style={{flex: 1, textAlign: 'center', fontWeight: 'bold'}}>Real-Time-Chat-App</Text>
