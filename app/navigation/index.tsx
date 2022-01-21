@@ -7,7 +7,7 @@
  
  import NotFoundScreen from '../screens/NotFoundScreen';
  import { createNativeStackNavigator } from '@react-navigation/native-stack';
- import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
+ import { RootStackParamList } from '../types';
  import LinkingConfiguration from './LinkingConfiguration';
  
  /*-----------------------------------MY IMPORTS------------------------------------------*/
@@ -23,6 +23,7 @@
 import { Auth, DataStore } from 'aws-amplify';
 import { useEffect, useState } from 'react';
 import { User } from '../src/models';
+import ProfileHeader from './ProfileHeader';
  /*---------------------------------------------------------------------------------------*/
  
 
@@ -42,7 +43,7 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
 */
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-function RootNavigator() {  
+function RootNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen 
@@ -54,7 +55,7 @@ function RootNavigator() {
       <Stack.Screen
         name="ChatRoom" 
         component={ChatRoomScreen} 
-        options={( { route } ) => ({ 
+        options={( { route } ) => ({
           headerTitle: () => <ChatRoomHeader id={route.params?.id} />,
         })}
       />
@@ -62,7 +63,7 @@ function RootNavigator() {
       <Stack.Screen
         name="UsersScreen" 
         component={UsersScreen} 
-        options={{ 
+        options={{
           title: "Users",
         }}
       />
@@ -70,25 +71,25 @@ function RootNavigator() {
       <Stack.Screen
         name="ProfileScreen"
         component={ProfileScreen}  
-        options={{ 
-          title: "Profile",
-        }}
+        options={( { route } ) => ({
+          headerTitle: () => <ProfileHeader id={route.params?.id} />,
+        })}
       />
 
       <Stack.Screen 
-      name="NotFound" 
-      component={NotFoundScreen} 
-      options={{ 
-        title: 'This page doesn\'t exist.',
-        headerStyle: {
-          backgroundColor: 'maroon',
-        },
-        headerTitleStyle: {
-          color: 'white',
-          fontSize: 25,
-          fontWeight: 'bold',
-        },
-      }} 
+        name="NotFound" 
+        component={NotFoundScreen} 
+        options={{ 
+          title: 'This page doesn\'t exist.',
+          headerStyle: {
+            backgroundColor: 'maroon',
+          },
+          headerTitleStyle: {
+            color: 'white',
+            fontSize: 25,
+            fontWeight: 'bold',
+          },
+        }} 
       />
     </Stack.Navigator>
   );
@@ -124,10 +125,10 @@ const HomeHeader = () => {
       alignItems: 'center',
     }}>
 
-      <Pressable onPress={() => navigation.navigate('ProfileScreen')}>
+      <Pressable onPress={() => navigation.navigate('ProfileScreen', { id: user?.id })}>
         <Image
           source={{uri: user?.imageUri}}
-          style={{ width: 50, height: 50, borderRadius: 15 }}
+          style={{ width: 50, height: 50, borderRadius: 15, borderWidth: 1 }}
         />
       </Pressable>
       
