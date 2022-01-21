@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { ChatRoom, Message as MessageModel } from '../src/models';
 import Message from '../components/Message'
 import MessageInput from '../components/MessageInput';
-import { useRoute, useNavigation } from '@react-navigation/core';
+import { useRoute } from '@react-navigation/core';
 import { DataStore } from '@aws-amplify/datastore';
 import { SortDirection } from 'aws-amplify';
 
@@ -13,7 +13,6 @@ export default function ChatRoomScreen(){
     const [chatRoom, setChatRoom] = useState<ChatRoom|null>(null);
 
     const route = useRoute();
-    const navigation = useNavigation();
 
     useEffect(() => {
         fetchChatRoom();

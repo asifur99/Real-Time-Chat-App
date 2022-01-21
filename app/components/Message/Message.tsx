@@ -4,18 +4,27 @@ import { DataStore } from '@aws-amplify/datastore';
 import { User } from '../../src/models';
 
 import styles from './styles';
-import { Auth } from 'aws-amplify';
+import { Auth, Storage } from 'aws-amplify';
 import { S3Image } from 'aws-amplify-react-native';
+import AudioPlayer from '../AudioPlayer';
 
 export default function Message({ message }) {
     const [user, setUser] = useState<User|undefined>();
     const [you, setYou] = useState<boolean>(false);
+    const [soundURI, setSoundURI] = useState<any>(null);
 
     const { width } = useWindowDimensions();
 
     useEffect(() => {
         DataStore.query(User, message.userID).then(setUser);
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        if (message.audio){
+            Storage.get(message.audio).then(setSoundURI);
+        }
+
+    }, [message]);
 
     useEffect(() => {
         const check = async () => {
@@ -28,15 +37,18 @@ export default function Message({ message }) {
         };
 
         check();
-    }, [user])
+    }, [user]);
 
     if (!user){
         return <ActivityIndicator />
-    }
+    };
 
     return (
-        <View style={
-            [styles.bubble, you ? styles.send : styles.receive]}
+        <View style={[
+            styles.bubble, 
+            you ? styles.send : styles.receive,
+            { width: soundURI ? '65%' : 'auto' },
+        ]}
         >
             {message.image && 
                 <S3Image 
@@ -49,8 +61,12 @@ export default function Message({ message }) {
                     resizeMode="contain"
                 />
             }
+
+            { soundURI && (
+                <AudioPlayer soundURI={soundURI} />
+            )}
             
             <Text style={{ color: you ? 'black' : 'white'}}>{ message.content }</Text>
         </View>
-    )
+    );
 }
