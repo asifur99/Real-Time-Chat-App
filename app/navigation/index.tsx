@@ -16,8 +16,8 @@
  import UsersScreen from '../screens/UsersScreen';
  import ProfileScreen from '../screens/ProfileScreen';
  
- import { ColorSchemeName, View, Image, Text, useWindowDimensions, Pressable } from 'react-native';
- import { MaterialCommunityIcons } from '@expo/vector-icons';
+ import { ColorSchemeName, View, Image, Text, useWindowDimensions, Pressable, StyleSheet } from 'react-native';
+ import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
  import { NavigationContainer, DefaultTheme, DarkTheme, useNavigation } from '@react-navigation/native';
  import ChatRoomHeader from './ChatRoomHeader';
 import { Auth, DataStore } from 'aws-amplify';
@@ -116,6 +116,10 @@ const HomeHeader = () => {
 
   const navigation = useNavigation();
 
+  const logout = () => {
+    Auth.signOut();
+  }
+
   return(
     <View style={{
       flexDirection: 'row', 
@@ -128,15 +132,36 @@ const HomeHeader = () => {
       <Pressable onPress={() => navigation.navigate('ProfileScreen', { id: user?.id })}>
         <Image
           source={{uri: user?.imageUri}}
-          style={{ width: 50, height: 50, borderRadius: 15, borderWidth: 1 }}
+          style={{ 
+            width: 50, 
+            height: 50, 
+            borderRadius: 15,
+            borderWidth: 1,
+          }}
         />
       </Pressable>
       
       <Text style={{flex: 1, textAlign: 'center', fontWeight: 'bold'}}>Real-Time-Chat-App</Text>
-      <Pressable onPress={() => navigation.navigate('UsersScreen')}>
-        <MaterialCommunityIcons name="circle-edit-outline" size={24} color="darkorange" style={{marginHorizontal: 30}} />
+      <Pressable onPress={() => navigation.navigate('UsersScreen')}  style={styles.btn}>
+        <MaterialCommunityIcons name="circle-edit-outline" size={24} color="black" />
+      </Pressable>
+
+      <Pressable onPress={logout} style={styles.btn}>
+        <MaterialIcons name="logout" size={24} color="black" />
       </Pressable>
     </View>
-  )
+  );
 }
+
+const styles = StyleSheet.create({
+  btn: {
+    backgroundColor: 'darkorange',
+    borderRadius: 15,
+    height: 50,
+    width: 50,
+    marginHorizontal: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
  
