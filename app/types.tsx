@@ -18,7 +18,6 @@
    Home: undefined;
    ChatRoom: undefined;
    UsersScreen: undefined;
-   ProfileScreen: undefined;
    NotFound: undefined;
  };
  
@@ -31,7 +30,6 @@
    Home: undefined;
    ChatRoom: undefined;
    UsersScreen: undefined;
-   ProfileScreen: undefined;
  };
  
  export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<

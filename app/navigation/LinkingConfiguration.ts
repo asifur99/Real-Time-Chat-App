@@ -6,7 +6,6 @@
 
  import { LinkingOptions } from '@react-navigation/native';
  import * as Linking from 'expo-linking';
- import { ChatRoom } from '../src/models';
  
  import { RootStackParamList } from '../types';
  
@@ -31,11 +30,6 @@
                UsersScreen: 'UsersScreen',
              },
            },
-           ProfileScreen: {
-            screens: {
-              ProfileScreen: 'Profile',
-            },
-          },
          },
        },
        NotFound: '*',
