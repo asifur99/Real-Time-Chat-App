@@ -12,3 +12,4 @@
 
 **Database:** DynamoDB
 
+Note: To Run the AWS-Amplify needs to be configured, won't work with my confirguration as you need to be authenticated. 
