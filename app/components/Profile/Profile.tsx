@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, Pressable, TextInput } from 'react-native'
+import { View, Text, Pressable, TextInput, Image } from 'react-native'
 import { User } from '../../src/models';
 import styles from './styles'
 import { Auth, DataStore } from 'aws-amplify';
@@ -33,6 +33,17 @@ export default function Profile({ user }) {
   return(
     <View style={{ alignItems: 'center', padding: 10 }}>
       <View style={styles.container}>
+        <Image 
+          source={{ uri: imageUri }} 
+          style={{ 
+            width: 100, 
+            height: 100, 
+            borderRadius: 15,
+            padding: 10,
+            marginLeft: '50%',
+          }}
+        />
+
         <View style={styles.element}>
           <Text style={styles.headings}>Name: { user?.name }</Text>
         </View>
@@ -43,7 +54,7 @@ export default function Profile({ user }) {
           <View style={styles.input}>
             <TextInput 
               value={ imageUri }
-              placeholder = 'Aa'
+              placeholder = 'Enter Image Uri'
               onChangeText={ setImageUri }
             />
           </View>
@@ -55,7 +66,7 @@ export default function Profile({ user }) {
           <View style={styles.input}>
             <TextInput 
               value={ status }
-              placeholder = 'Aa'
+              placeholder = 'Enter Status'
               onChangeText={ setStatus }
             />
           </View>
