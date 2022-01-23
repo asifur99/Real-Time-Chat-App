@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, FlatList, Pressable, Text } from 'react-native';
+import { View, StyleSheet, FlatList } from 'react-native';
 import { Auth } from 'aws-amplify';
 import { DataStore } from '@aws-amplify/datastore';
 

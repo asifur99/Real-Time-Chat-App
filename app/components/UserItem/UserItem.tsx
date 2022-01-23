@@ -44,6 +44,7 @@ export default function UserItem({ user }) {
             <View style={styles.chatBox}>
                 <View style={styles.group}>
                     <Text style={styles.name}>{user.name}</Text>
+                    <Text numberOfLines={1} style={[styles.status, { width: 150 }]}>{user.status}</Text>
                 </View>
             </View>
         </Pressable>

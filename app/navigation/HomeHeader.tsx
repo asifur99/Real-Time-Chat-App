@@ -40,10 +40,8 @@ const HomeHeader = ({ id }) => {
       padding: 10,
       alignItems: 'center',
     }}>
-
-      <Modal 
-        visible={modal} 
-        style={styles.modal}
+      <Modal
+        visible={modal}
         animationType='fade'
       >
         <View style={styles.close}>
@@ -101,9 +99,6 @@ const styles = StyleSheet.create({
     margin: 10,
     marginHorizontal: '97%',
   },
-  modal: {
-
-  }
 });
 
 export default HomeHeader;
