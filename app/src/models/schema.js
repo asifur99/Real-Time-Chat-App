@@ -21,14 +21,14 @@ export const schema = {
                     "name": "userID",
                     "isArray": false,
                     "type": "ID",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "chatroomID": {
                     "name": "chatroomID",
                     "isArray": false,
                     "type": "ID",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "image": {
@@ -227,7 +227,7 @@ export const schema = {
                     "name": "name",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 },
                 "imageUri": {
@@ -379,5 +379,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "4c9faf9e6ea55220bf66a65e311aa609"
+    "version": "0134156ce382f2caece578c2203b2ddc"
 };

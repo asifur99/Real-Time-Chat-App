@@ -28,6 +28,7 @@
           "passwordPolicyCharacters": [
             "REQUIRES_LOWERCASE",
             "REQUIRES_NUMBERS",
+            "REQUIRES_SYMBOLS",
             "REQUIRES_UPPERCASE"
           ]
         },
@@ -58,12 +59,6 @@
           "additionalAuthenticationProviders": [
             {
               "authenticationType": "AWS_IAM"
-            },
-            {
-              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-              "userPoolConfig": {
-                "userPoolId": "authRealTimeChatApp"
-              }
             }
           ]
         }
@@ -78,7 +73,7 @@
     }
   },
   "storage": {
-    "content": {
+    "s3d6dbdd5b": {
       "service": "S3",
       "providerPlugin": "awscloudformation",
       "dependsOn": []

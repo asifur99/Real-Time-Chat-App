@@ -23,8 +23,8 @@ type ChatRoomUserMetaData = {
 export declare class Message {
   readonly id: string;
   readonly content?: string;
-  readonly userID?: string;
-  readonly chatroomID?: string;
+  readonly userID: string;
+  readonly chatroomID: string;
   readonly image?: string;
   readonly audio?: string;
   readonly createdAt?: string;
@@ -48,7 +48,7 @@ export declare class ChatRoom {
 
 export declare class User {
   readonly id: string;
-  readonly name: string;
+  readonly name?: string;
   readonly imageUri?: string;
   readonly status?: string;
   readonly Messages?: (Message | null)[];

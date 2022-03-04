@@ -3,7 +3,7 @@
   "cognitoConfig": {
     "identityPoolName": "testAuthIdentityPool",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "realtie7da5b2c",
+    "resourceNameTruncated": "realtif1f37c8d",
     "userPoolName": "RealTimeChatApp",
     "autoVerifiedAttributes": [
       "email"
@@ -15,13 +15,14 @@
     ],
     "smsAuthenticationMessage": "Your login code is {####}",
     "smsVerificationMessage": "Your verification code is {####}",
-    "emailVerificationSubject": "Forgot password code: {####}",
-    "emailVerificationMessage": "Forgot password code: {####}",
+    "emailVerificationSubject": "Your password code: {####}",
+    "emailVerificationMessage": "Your password code: {####}",
     "defaultPasswordPolicy": false,
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [
       "Requires Lowercase",
       "Requires Numbers",
+      "Requires Symbols",
       "Requires Uppercase"
     ],
     "requiredAttributes": [
@@ -32,9 +33,9 @@
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [],
     "userpoolClientReadAttributes": [],
-    "userpoolClientLambdaRole": "RealTie7da5b2c_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "RealTif1f37c8d_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "e7da5b2c",
+    "sharedId": "f1f37c8d",
     "resourceName": "RealTimeChatApp",
     "authSelections": "identityPoolAndUserPool",
     "serviceName": "Cognito",

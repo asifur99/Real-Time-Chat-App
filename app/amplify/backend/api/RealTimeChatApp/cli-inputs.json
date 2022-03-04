@@ -3,7 +3,7 @@
   "serviceConfiguration": {
     "apiName": "RealTimeChatApp",
     "serviceName": "AppSync",
-    "gqlSchemaPath": "/tmp/amplify-30e47254-b1d8-4e5b-97e6-0f111520f610/amplify/backend/api/RealTimeChatApp/schema.graphql",
+    "gqlSchemaPath": "/tmp/amplify-6ed7a9b8-1d50-41b8-afa9-f8a8f57fc7b3/amplify/backend/api/RealTimeChatApp/schema.graphql",
     "defaultAuthType": {
       "mode": "API_KEY",
       "keyDescription": "api key description",
@@ -12,10 +12,6 @@
     "additionalAuthTypes": [
       {
         "mode": "AWS_IAM"
-      },
-      {
-        "mode": "AMAZON_COGNITO_USER_POOLS",
-        "cognitoUserPoolId": "authRealTimeChatApp"
       }
     ],
     "conflictResolution": {

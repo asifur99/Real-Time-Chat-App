@@ -1,7 +1,7 @@
 {
-  "resourceName": "content",
-  "policyUUID": "6ed05c40",
-  "bucketName": "realtimechatapp0ba03ece4f664ea5b524ed3f3d7cb197",
+  "resourceName": "s3d6dbdd5b",
+  "policyUUID": "d6dbdd5b",
+  "bucketName": "realtimechatappba5d6511106648b1a7072d7c23b4c32f",
   "storageAccess": "auth",
   "guestAccess": [],
   "authAccess": [
