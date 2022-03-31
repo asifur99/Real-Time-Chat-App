@@ -6,7 +6,7 @@ import Message from '../components/Message'
 import MessageInput from '../components/MessageInput';
 import { useRoute } from '@react-navigation/core';
 import { DataStore } from '@aws-amplify/datastore';
-import { SortDirection } from 'aws-amplify';
+import { Auth, SortDirection } from 'aws-amplify';
 
 export default function ChatRoomScreen(){
     const [messages, setMessages] = useState<MessageModel[]>([]);
@@ -25,7 +25,12 @@ export default function ChatRoomScreen(){
     useEffect(() => {
         const subscription = DataStore.observe(MessageModel).subscribe(msg => {
             if (msg.model === MessageModel && msg.opType === 'INSERT') {
-                setMessages(existingMessages => [ msg.element, ...existingMessages ]);
+                if (msg.element.chatroomID === route.params?.id){
+                    setMessages(existingMessages => [ msg.element, ...existingMessages ]);
+                }
+                else{
+                    console.log("Not For You!")
+                }
             }
         });
 
@@ -58,6 +63,7 @@ export default function ChatRoomScreen(){
             {
                 sort: message => message.createdAt(SortDirection.DESCENDING),
             });
+
         setMessages(fetchMessages);
     }
 
