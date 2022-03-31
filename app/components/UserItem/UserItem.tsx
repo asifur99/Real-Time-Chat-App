@@ -13,28 +13,44 @@ export default function UserItem({ user }) {
     const navigation = useNavigation();
 
     const onPress = async () => {
-        // TODO: dont create a new chat room if one already exists
-        // Query chatroom and charusers and filter on user id
-
-        // Create a chatroom
-        const newChatRoom = await DataStore.save(new ChatRoom({newMessages: 0}));
-
         // connect authenticated/current user with the room
         const authenticatedUser = await Auth.currentAuthenticatedUser();
         const currentUser = await DataStore.query(User, authenticatedUser.attributes.sub);
         
-        await DataStore.save(new ChatRoomUser({
-            user: currentUser,
-            chatRoom: newChatRoom
-        }));
+        const findChat = (await DataStore.query(ChatRoomUser)).filter(obj => obj.user.id === user.id).map(obj => obj.chatRoom.id);
+        const findChatCurr = (await DataStore.query(ChatRoomUser)).filter(obj => obj.user.id === currentUser.id).map(obj => obj.chatRoom.id);
 
-        // connect authenticated/current user with the room 
-        await DataStore.save(new ChatRoomUser({
-            user,
-            chatRoom: newChatRoom
-        }));
+        // Filtering the rooms to check if a room already exists
+        const filteredArray = findChat.filter(value => findChatCurr.includes(value));
 
-        navigation.navigate('ChatRoom', { id: newChatRoom.id });
+        console.log(filteredArray)
+
+        // Ignore if trying to make a chatroom with themselves
+        if (currentUser.id === user.id) {
+            alert("Cannot Start a Chat with Yourself");
+        }
+        // No chatroom found with the specified person
+        else if (filteredArray.length === 0){
+            // Create a chatroom
+            const newChatRoom = await DataStore.save(new ChatRoom({newMessages: 0}));
+      
+            await DataStore.save(new ChatRoomUser({
+                user: currentUser,
+                chatRoom: newChatRoom
+            }));
+
+            // connect authenticated/current user with the room 
+            await DataStore.save(new ChatRoomUser({
+                user,
+                chatRoom: newChatRoom
+            }));
+
+            navigation.navigate('ChatRoom', { id: newChatRoom.id });
+        }
+        // Redirect to the existing chat room
+        else if (filteredArray.length > 0){
+            navigation.navigate('ChatRoom', { id: filteredArray[0] });
+        }
     }
 
     return(
