@@ -1,12 +1,12 @@
 {
   "auth": {
-    "RealTimeChatApp": {
+    "ChatAppBackend": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [
         {
           "category": "function",
-          "resourceName": "RealTimeChatAppPostConfirmation",
+          "resourceName": "ChatAppBackendPostConfirmation",
           "triggerProvider": "Cognito",
           "attributes": [
             "Arn",
@@ -20,11 +20,9 @@
         "usernameAttributes": [
           "EMAIL"
         ],
-        "signupAttributes": [
-          "EMAIL"
-        ],
+        "signupAttributes": [],
         "passwordProtectionSettings": {
-          "passwordPolicyMinLength": 8,
+          "passwordPolicyMinLength": 6,
           "passwordPolicyCharacters": [
             "REQUIRES_LOWERCASE",
             "REQUIRES_NUMBERS",
@@ -44,7 +42,7 @@
     }
   },
   "api": {
-    "RealTimeChatApp": {
+    "ChatAppBackend": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
       "output": {
@@ -66,14 +64,14 @@
     }
   },
   "function": {
-    "RealTimeChatAppPostConfirmation": {
+    "ChatAppBackendPostConfirmation": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
   },
   "storage": {
-    "s3d6dbdd5b": {
+    "s39c7d1b7e": {
       "service": "S3",
       "providerPlugin": "awscloudformation",
       "dependsOn": []

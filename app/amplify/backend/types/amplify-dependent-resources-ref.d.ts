@@ -1,6 +1,6 @@
 export type AmplifyDependentResourcesAttributes = {
     "auth": {
-        "RealTimeChatApp": {
+        "ChatAppBackend": {
             "IdentityPoolId": "string",
             "IdentityPoolName": "string",
             "UserPoolId": "string",
@@ -12,14 +12,14 @@ export type AmplifyDependentResourcesAttributes = {
         }
     },
     "api": {
-        "RealTimeChatApp": {
+        "ChatAppBackend": {
             "GraphQLAPIKeyOutput": "string",
             "GraphQLAPIIdOutput": "string",
             "GraphQLAPIEndpointOutput": "string"
         }
     },
     "function": {
-        "RealTimeChatAppPostConfirmation": {
+        "ChatAppBackendPostConfirmation": {
             "Name": "string",
             "Arn": "string",
             "LambdaExecutionRole": "string",
@@ -27,7 +27,7 @@ export type AmplifyDependentResourcesAttributes = {
         }
     },
     "storage": {
-        "s3d6dbdd5b": {
+        "s39c7d1b7e": {
             "BucketName": "string",
             "Region": "string"
         }

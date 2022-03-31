@@ -1,26 +1,26 @@
 {
   "staging": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-realtimechatapp-staging-222746-authRole",
-      "UnauthRoleArn": "arn:aws:iam::581288513437:role/amplify-realtimechatapp-staging-222746-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::581288513437:role/amplify-realtimechatapp-staging-222746-authRole",
-      "Region": "ca-central-1",
-      "DeploymentBucketName": "amplify-realtimechatapp-staging-222746-deployment",
-      "UnauthRoleName": "amplify-realtimechatapp-staging-222746-unauthRole",
-      "StackName": "amplify-realtimechatapp-staging-222746",
-      "StackId": "arn:aws:cloudformation:ca-central-1:581288513437:stack/amplify-realtimechatapp-staging-222746/2d29eec0-8865-11ec-809b-024cee692422",
-      "AmplifyAppId": "d3oz90sqiee2ga",
-      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-realtimechatapp-staging-222746-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+      "AuthRoleName": "amplify-chatappbackend-staging-20457-authRole",
+      "UnauthRoleArn": "arn:aws:iam::581288513437:role/amplify-chatappbackend-staging-20457-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::581288513437:role/amplify-chatappbackend-staging-20457-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-chatappbackend-staging-20457-deployment",
+      "UnauthRoleName": "amplify-chatappbackend-staging-20457-unauthRole",
+      "StackName": "amplify-chatappbackend-staging-20457",
+      "StackId": "arn:aws:cloudformation:us-east-1:581288513437:stack/amplify-chatappbackend-staging-20457/f7bbb660-b096-11ec-be23-0a61f8730b65",
+      "AmplifyAppId": "d21hpujuhnn67p",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-chatappbackend-staging-20457-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
     },
     "categories": {
-      "function": {
-        "RealTimeChatAppPostConfirmation": {
-          "deploymentBucketName": "amplify-realtimechatapp-staging-222746-deployment",
-          "s3Key": "amplify-builds/RealTimeChatAppPostConfirmation-7a4a6c4f6f5067526663-build.zip"
-        }
-      },
       "auth": {
-        "RealTimeChatApp": {}
+        "ChatAppBackend": {}
+      },
+      "function": {
+        "ChatAppBackendPostConfirmation": {
+          "deploymentBucketName": "amplify-chatappbackend-staging-20457-deployment",
+          "s3Key": "amplify-builds/ChatAppBackendPostConfirmation-52735248524f5a6d5861-build.zip"
+        }
       }
     }
   }
