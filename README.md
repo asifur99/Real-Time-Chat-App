@@ -21,5 +21,5 @@ Note: To Run the AWS-Amplify needs to be configured, won't work with my configur
 3. npm install : to install the Node Modules needed to run the Application
 4. Make sure to install aws-amplify from aws website
 5. npm start : to start the application
-6. In the web browser click start web which will compile and open a new tab with the application's Authentication screen
+6. In the web browser click run in web browser which will compile and open a new tab with the application's Authentication screen
 7. Start using the application
